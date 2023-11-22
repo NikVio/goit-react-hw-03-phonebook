@@ -17,19 +17,20 @@ export class App extends Component {
 
   componentDidMount() {
     const saveContact = window.localStorage.getItem(LC_KEY);
-    if (saveContact !== null) {
+    const parsedContact = JSON.parse(saveContact);
+    if (parsedContact) {
       this.setState({
-        filter: JSON.parse(saveContact),
+        contacts: parsedContact,
       });
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     console.log('componentDidUpdate');
-    const { filter } = this.state;
-    const addLC = prevState.filter !== this.state.filter;
+    const { contacts } = this.state;
+    const addLC = prevState.contacts !== contacts;
     if (addLC) {
-      window.localStorage.setItem(LC_KEY, JSON.stringify(filter));
+      window.localStorage.setItem(LC_KEY, JSON.stringify(contacts));
     }
   }
 

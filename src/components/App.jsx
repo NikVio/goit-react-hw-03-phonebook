@@ -26,7 +26,6 @@ export class App extends Component {
   }
 
   componentDidUpdate(_, prevState) {
-    console.log('componentDidUpdate');
     const { contacts } = this.state;
     const addLC = prevState.contacts !== contacts;
     if (addLC) {
